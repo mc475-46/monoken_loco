@@ -25,6 +25,7 @@ void loop() {
   int mascon = analogRead(MASCON);
   float throttle = mascon > 25 ? mascon / 1023.0 * 200 : 0; // 最大値は200程度にしておく(ICの仕様)
 
+  // 速度制御
   byte a = 0, b = 0;
   if (throttle == 0){
     // 惰性走行
@@ -43,4 +44,13 @@ void loop() {
   }
   analogWrite(OUT_A, a);
   analogWrite(OUT_B, b);
+
+  // ヘッドライトの明るさ制御
+  if (digitalRead(DIMMER_SW) == LOW){
+    // 減灯
+    digitalWrite(DIMMER_OUT, HIGH);
+  } else {
+    // 減灯しない
+    digitalWrite(DIMMER_OUT, LOW);
+  }
 }
