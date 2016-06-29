@@ -65,4 +65,8 @@ void loop() {
   }
   analogWrite(OUT_A, a);
   analogWrite(OUT_B, b);
+  
+  // ライト制御
+  digitalWrite(HEADLIGHT, !digitalRead(TRANSF));
+  digitalWrite(TAILLIGHT, !digitalRead(TRANSB));
 }
